@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllTasks = exports.editTask = exports.deleteTask = exports.createTask = void 0;
+exports.getOneTask = exports.getAllTasks = exports.editTask = exports.deleteTask = exports.createTask = void 0;
 const userModel_1 = __importDefault(require("../model/userModel"));
 const taskModel_1 = __importDefault(require("../model/taskModel"));
 const mongoose_1 = __importDefault(require("mongoose"));
@@ -126,6 +126,10 @@ const getAllTasks = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                 message: "user not found"
             });
         }
+        return res.status(200).json({
+            message: "user task gotten",
+            data: getOne
+        });
     }
     catch (err) {
         return res.status(400).json({
@@ -135,3 +139,32 @@ const getAllTasks = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.getAllTasks = getAllTasks;
+// get one task
+const getOneTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const findUser = yield userModel_1.default.findById(req.params.userId);
+        if (findUser) {
+            const findOneTask = yield taskModel_1.default.findById(req.params.taskId);
+            return res.status(200).json({
+                message: "task gotten",
+                data: findOneTask
+            });
+        }
+        else {
+            return res.status(400).json({
+                message: "task not found"
+            });
+        }
+        return res.status(200).json({
+            message: "one task found",
+            data: findUser
+        });
+    }
+    catch (err) {
+        return res.status(400).json({
+            message: "error getting one tasks",
+            err: err
+        });
+    }
+});
+exports.getOneTask = getOneTask;

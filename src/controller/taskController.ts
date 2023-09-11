@@ -147,12 +147,47 @@ export const getAllTasks = async (req: Request, res: Response): Promise<Response
             })
         }
 
-        
-        
+        return res.status(200).json({
+            message: "user task gotten",
+            data: getOne
+        })
+
     } catch (err) {
         return res.status(400).json({
             message: "error getting tasks",
             err: err
         })
     }
+}
+
+// get one task
+export const getOneTask = async (req: Request, res: Response): Promise<Response> => {
+    try {
+        const findUser = await userModel.findById(req.params.userId)  
+
+        if (findUser) {
+            const findOneTask = await taskModel.findById(req.params.taskId);
+
+            return res.status(200).json({
+                message: "task gotten",
+                data: findOneTask
+            })
+        }  else {
+            return res.status(400).json({
+                message: "task not found"
+            })
+        }
+        
+        return res.status(200).json({
+            message: "one task found",
+            data: findUser
+        })
+
+    } catch (err) {
+        return res.status(400).json({
+            message: "error getting one tasks",
+            err: err
+        })
+    }
+
 }

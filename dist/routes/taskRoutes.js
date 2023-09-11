@@ -7,4 +7,5 @@ router.route("/createtask/:userId").post(taskController_1.createTask);
 router.route("/deleteTask/:userId/:taskId").delete(taskController_1.deleteTask);
 router.route("/editTask/:userId/:taskId").patch(taskController_1.editTask);
 router.route("/getalltasks/:userId").get(taskController_1.getAllTasks);
+router.route("/getonetask/:userId/taskId").get(taskController_1.getOneTask);
 exports.default = router;
