@@ -58,8 +58,8 @@ const deleteTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         const user = yield userModel_1.default.findById(req.params.userId);
         if (user) {
-            const findTask = yield taskModel_1.default.findById(req.params.taskId);
-            yield ((_b = user === null || user === void 0 ? void 0 : user.tasks) === null || _b === void 0 ? void 0 : _b.unshift(new mongoose_1.default.Types.ObjectId(findTask === null || findTask === void 0 ? void 0 : findTask._id)));
+            const findTask = yield taskModel_1.default.findByIdAndDelete(req.params.taskId);
+            yield ((_b = user === null || user === void 0 ? void 0 : user.tasks) === null || _b === void 0 ? void 0 : _b.push(new mongoose_1.default.Types.ObjectId(findTask === null || findTask === void 0 ? void 0 : findTask._id)));
             user.save();
             return res.status(200).json({
                 message: "tasks deleted"

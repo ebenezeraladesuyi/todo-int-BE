@@ -55,9 +55,9 @@ export const deleteTask = async (req: Request, res: Response): Promise<Response>
         const user = await userModel.findById(req.params.userId);
 
         if (user) {
-            const findTask = await taskModel.findById(req.params.taskId);
+            const findTask = await taskModel.findByIdAndDelete(req.params.taskId);
 
-            await user?.tasks?.unshift(
+            await user?.tasks?.push(
                 new mongoose.Types.ObjectId(findTask?._id)
             )
 

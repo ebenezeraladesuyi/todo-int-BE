@@ -106,7 +106,8 @@ export const signin = async (req: Request, res: Response): Promise<Response> => 
         }
 
         return res.status(200).json({
-            message: 'login successful'
+            message: 'login successful',
+            data: findUser
         })
         
     } catch (err) {

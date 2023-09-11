@@ -100,7 +100,8 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             }
         }
         return res.status(200).json({
-            message: 'login successful'
+            message: 'login successful',
+            data: findUser
         });
     }
     catch (err) {
